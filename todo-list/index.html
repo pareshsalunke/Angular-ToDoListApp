@@ -1,0 +1,37 @@
+<!doctype html>
+<html ng-app='todo'>
+<head>
+ <title>To Do list in Angular JS</title>
+ 
+ <script type="text/javascript" src="https://code.angularjs.org/1.2.28/angular.js"></script>
+ <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+<body>
+     <!-- App Container -->
+     <div id="todoapp" ng-controller="ToDoCtrl">
+         <!-- Input Area -->
+         <div id="addtask">
+             <!-- Input Text box -->
+             <input type="text" name="add-task" class='add task' placeholder="Add your task here" ng-model="taskName" ng-keyup="addTask()"/>
+             <!-- Priority Selector -->
+             <select ng-model="priority">
+                 <option value='normal'>Normal</option>
+                 <option value='medium'>Medium</option>
+                 <option value='high'>High</option>
+             </select>
+         </div>
+         
+         <!-- List Area -->
+         <ul id="todo-list">
+             <li ng-repeat = "task in tasklist track by $index" ng-mouseenter="task.showdelete = true; item= 'focus'" ng-mouseleave="task.showdelete = false; item = 'nofocus'" ng-class="item">
+                <input type="checkbox" name="checkbox" ng-model="task.completed" />
+                <span class="completed-{{task.completed}}">{{task.name}}</span>
+                <span class="priority {{task.priority}}">{{task.priority}}</span>               
+                <span class="delete icon" title="Delete Task" ng-show="task.showdelete" ng-click="deleteTask(tasklist.indexOf(task))"></span>
+             </li>
+         </ul>
+     </div>
+     <!-- Our custom code script goes at the end of the body tag. -->
+     <script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
